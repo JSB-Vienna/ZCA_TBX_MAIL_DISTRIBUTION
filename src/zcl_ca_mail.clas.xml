@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_CLAS" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <VSEOCLASS>
+    <CLSNAME>ZCL_CA_MAIL</CLSNAME>
+    <LANGU>E</LANGU>
+    <DESCRIPT>CA-TBX: Mail distribution</DESCRIPT>
+    <STATE>1</STATE>
+    <CLSCCINCL>X</CLSCCINCL>
+    <FIXPT>X</FIXPT>
+    <UNICODE>X</UNICODE>
+   </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CMPNAME>ADD_RECIPIENT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Add recipient</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>ASSEMBLE_ATTACHM_NAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Assemble attachment name without extension</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Attach single document, e. g. direct upload</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Attach archived documents</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Constructor</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_REQSTAT_ALWAYS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Requested status: Always</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_REQSTAT_ERROR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Requested status: Only if errors occur</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_REQSTAT_NEVER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Requested status: Never</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_REQSTAT_READ</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Requested status: If read</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_REQSTAT_SENT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Requested status: If sent</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_STATMAIL_ALWAYS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Status mail: Always</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_STATMAIL_ERROR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Status mail: Only if errors occur</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_STATMAIL_NEVER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Status mail: Never</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_STATMAIL_READ</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Status mail: If read</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_STATMAIL_SENT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Status mail: If sent</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_SUBOBJ_MAILING</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Application Log: Subobject to ZCA: Mailing</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>FINALIZE_ATTACHM_NAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Add file extension and shorten the name to 50 digits</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>GET_MAIL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get mail document</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>GET_REQUEST</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get send request</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MO_BCS_QUEUE_AGENT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Agent Send Request</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MO_COMMIT_MODES</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Constants for commit mode</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MO_LOG</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common object: Application log (BAL)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MO_MAIL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Wrapper Class for Office Documents</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MO_SND_REQ</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Business Communication Service</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MV_CHARSET</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Name of Character Set</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MV_MAIL_SIZE</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail size</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>MV_SUBJECT_LONG</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Long subject (at the end limited to 255 digits)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>SEND</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Send mail</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>SET_MAIL</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Set mail document</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>SET_REQUEST</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Set send request</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Set subject and mail body</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
+   <DESCRIPTIONS_SUB>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD_RECIPIENT</CMPNAME>
+     <SCONAME>IS_RECIPIENT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail recipient</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ADD_RECIPIENT</CMPNAME>
+     <SCONAME>ZCX_CA_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Mail creation / distribution failed</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ASSEMBLE_ATTACHM_NAME</CMPNAME>
+     <SCONAME>IO_DOC</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>ArchiveLink + DMS: Archived document</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ASSEMBLE_ATTACHM_NAME</CMPNAME>
+     <SCONAME>IV_DOC_CNT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Sequential number of current document</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ASSEMBLE_ATTACHM_NAME</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Assembled attachment name without file extension</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <SCONAME>IT_ATTACHM_HEX</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Attachment content in hex/binary format</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <SCONAME>IT_ATTACHM_TEXT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Attachment content in character format</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <SCONAME>IV_ATTACHM_NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Subject / file name of attachment (limited to 50 digits!!)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <SCONAME>IV_ATTACHM_SIZE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Size of attachment</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <SCONAME>IV_ATTACHM_TYPE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>SAP office document class (see table TSOTD)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOC</CMPNAME>
+     <SCONAME>ZCX_CA_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Mail creation / distribution failed</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>IT_ARCHIVE_DOCS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>ArchiveLink and DMS document instances</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>IV_MAX_FILE_SIZE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Max. size of a single attachment (2 MB, 0 = every size!)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>IV_MAX_MAIL_SIZE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Max. size of the complete email (12,5 MB)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>IV_RAISE_EXC_MAIL_SIZE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>X = Raise exception, when mail size is exceeded</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Number of skipped attachments - too large, not found, etc.</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>ZCX_CA_ARCHIVE_CONTENT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Error while handling ArchiveLink content</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>ATTACH_DOCS_FROM_ARCHIVE</CMPNAME>
+     <SCONAME>ZCX_CA_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Mail creation / distribution failed</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>IT_RECIPIENTS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail recepients</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>IV_REPLY_TO</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Reply address if different from sender address</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>IV_SENDER</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>User id of sender (use e. g. in BG to repl WF-BATCH/SAP_WFRT</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>CONSTRUCTOR</CMPNAME>
+     <SCONAME>ZCX_CA_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Mail creation / distribution failed</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>FINALIZE_ATTACHM_NAME</CMPNAME>
+     <SCONAME>IV_ATTACHM_NAME</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Business object type and key</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>FINALIZE_ATTACHM_NAME</CMPNAME>
+     <SCONAME>IV_FILE_EXT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Sequential number of current document</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>FINALIZE_ATTACHM_NAME</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Prepared attachment name</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET_MAIL</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>GET_REQUEST</CMPNAME>
+     <SCONAME>RESULT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Send request</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND</CMPNAME>
+     <SCONAME>IV_COMMIT_MODE</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Commi mode (use const. C_COMMIT_MODE_*)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND</CMPNAME>
+     <SCONAME>IV_IMMEDIATELY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>X = Send mail immediately</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND</CMPNAME>
+     <SCONAME>IV_REQ_STATUS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Requested Status (use const C_REQSTAT_*)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND</CMPNAME>
+     <SCONAME>IV_STATUS_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Setting which status are reported by mail (use C_STATMAIL_*)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SEND</CMPNAME>
+     <SCONAME>ZCX_CA_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Mail creation / distribution failed</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_MAIL</CMPNAME>
+     <SCONAME>IO_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_REQUEST</CMPNAME>
+     <SCONAME>IO_SND_REQ</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Send request</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <SCONAME>IT_MAIL_TEXT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail text</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <SCONAME>IT_MAIL_TEXT_HEX</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Mail text in hex / binary</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <SCONAME>IV_DOC_CLASS</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Document class (use const. C_DOCCLASS_*)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <SCONAME>IV_PRIORITY</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Document priority -&gt; 1 = high, 5 = medium, 9 = low</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <SCONAME>IV_SUBJECT</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Subject (restricted to 50 char, if distr. via SAP connect)</DESCRIPT>
+    </SEOSUBCOTX>
+    <SEOSUBCOTX>
+     <CMPNAME>SET_TEXT</CMPNAME>
+     <SCONAME>ZCX_CA_MAIL</SCONAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Common exception: Mail creation / distribution failed</DESCRIPT>
+    </SEOSUBCOTX>
+   </DESCRIPTIONS_SUB>
+  </asx:values>
+ </asx:abap>
+</abapGit>
