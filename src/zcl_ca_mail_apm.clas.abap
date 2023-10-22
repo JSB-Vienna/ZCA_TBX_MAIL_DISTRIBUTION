@@ -20,7 +20,6 @@ ENDCLASS.
 
 CLASS ZCL_CA_MAIL_APM IMPLEMENTATION.
 
-
   METHOD constructor.
     "-----------------------------------------------------------------*
     "   Constructor
@@ -29,7 +28,7 @@ CLASS ZCL_CA_MAIL_APM IMPLEMENTATION.
          VALUE #(
             group_id        = 'itinere.at'
             artifact_id     = 'zca_tbx_mail_distribution'
-            version         = '0.1.0'
+            version         = '1.0.0'
             repository_type = 'abapGit'
             git_url         = 'https://github.com/JSB-Vienna/zca_tbx_mail_distribution.git'
             dependencies    =
@@ -37,15 +36,16 @@ CLASS ZCL_CA_MAIL_APM IMPLEMENTATION.
                         group_id       = 'itinere.at'
                       ( artifact_id    = 'zca_tbx_archiving'
                         git_url        = 'https://github.com/JSB-Vienna/zca_tbx_archiving.git'
-                        version        = '0.1.0'
+                        version        = '1.0.0'
                         target_package = 'zca_tbx_archiving' )
-                      ( artifact_id    = 'zca_tbx_base'
-                        git_url        = 'https://github.com/JSB-Vienna/zca_tbx_base.git'
-                        version        = '0.1.0'
-                        target_package = 'zca_tbx_base' )
+                      ( artifact_id    = 'zca_toolbox'
+                        git_url        = 'https://github.com/JSB-Vienna/zca_toolbox.git'
+                        version        = '1.0.0'
+                        target_package = 'zca_toolbox' )
                       ( artifact_id    = 'zca_tbx_application_logging'
-                        version        = '0.1.0'
+                        version        = '1.0.0'
                         git_url        = 'https://github.com/JSB-Vienna/zca_tbx_application_logging.git'
                         target_package = 'zca_tbx_application_logging' ) ) ) ##no_text.
   ENDMETHOD.                    "constructor
+  
 ENDCLASS.
