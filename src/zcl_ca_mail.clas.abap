@@ -48,7 +48,7 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
       "! <p class="shorttext synchronized" lang="en">Add recipient</p>
       "!
       "! @parameter is_recipient | <p class="shorttext synchronized" lang="en">Mail recipient</p>
-      "! @raising   zcx_ca_mail  | <p class="shorttext synchronized" lang="en">Common exception: Mail creation / distribution failed</p>
+      "! @raising   zcx_ca_mail  | <p class="shorttext synchronized" lang="en">CA-TBX exception: Mail creation / distribution failed</p>
       add_recipient
         IMPORTING
           is_recipient TYPE zca_s_mail_recipient
@@ -62,7 +62,7 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
       "! @parameter iv_attachm_size | <p class="shorttext synchronized" lang="en">Size of attachment</p>
       "! @parameter it_attachm_text | <p class="shorttext synchronized" lang="en">Attachment content in character format</p>
       "! @parameter it_attachm_hex  | <p class="shorttext synchronized" lang="en">Attachment content in hex/binary format</p>
-      "! @raising   zcx_ca_mail     | <p class="shorttext synchronized" lang="en">Common exception: Mail creation / distribution failed</p>
+      "! @raising   zcx_ca_mail     | <p class="shorttext synchronized" lang="en">CA-TBX exception: Mail creation / distribution failed</p>
       attach_doc
         IMPORTING
           iv_attachm_type TYPE so_obj_tp DEFAULT 'EXT' ##no_text
@@ -80,8 +80,8 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
       "! @parameter iv_max_mail_size       | <p class="shorttext synchronized" lang="en">Max. size of the complete email (12,5 MB)</p>
       "! @parameter iv_raise_exc_mail_size | <p class="shorttext synchronized" lang="en">X = Raise exception, when mail size is exceeded</p>
       "! @parameter result                 | <p class="shorttext synchronized" lang="en">Number of skipped attachments - too large, not found, etc.</p>
-      "! @raising   zcx_ca_mail            | <p class="shorttext synchronized" lang="en">Common exception: Mail creation / distribution failed</p>
-      "! @raising   zcx_ca_archive_content | <p class="shorttext synchronized" lang="en">Common exception: Error while handling ArchiveLink content</p>
+      "! @raising   zcx_ca_mail            | <p class="shorttext synchronized" lang="en">CA-TBX exception: Mail creation / distribution failed</p>
+      "! @raising   zcx_ca_archive_content | <p class="shorttext synchronized" lang="en">CA-TBX exception: Error while handling ArchiveLink content</p>
       attach_docs_from_archive
         IMPORTING
           it_archive_docs        TYPE zca_tt_archive_docs
@@ -99,7 +99,7 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
       "! @parameter iv_sender     | <p class="shorttext synchronized" lang="en">User id of sender (use e. g. in BG to repl WF-BATCH/SAP_WFRT</p>
       "! @parameter iv_reply_to   | <p class="shorttext synchronized" lang="en">Reply address if different from sender address</p>
       "! @parameter it_recipients | <p class="shorttext synchronized" lang="en">Mail recepients</p>
-      "! @raising   zcx_ca_mail   | <p class="shorttext synchronized" lang="en">Common exception: Mail creation / distribution failed</p>
+      "! @raising   zcx_ca_mail   | <p class="shorttext synchronized" lang="en">CA-TBX exception: Mail creation / distribution failed</p>
       constructor
         IMPORTING
           iv_sender     TYPE uname DEFAULT sy-uname
@@ -127,8 +127,8 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
       "! @parameter iv_immediately | <p class="shorttext synchronized" lang="en">X = Send mail immediately</p>
       "! @parameter iv_req_status  | <p class="shorttext synchronized" lang="en">Requested Status (use const C_REQSTAT_*)</p>
       "! @parameter iv_status_mail | <p class="shorttext synchronized" lang="en">Setting which status are reported by mail (use C_STATMAIL_*)</p>
-      "! @parameter iv_commit_mode | <p class="shorttext synchronized" lang="en">Commi mode (use const. C_COMMIT_MODE_*)</p>
-      "! @raising   zcx_ca_mail    | <p class="shorttext synchronized" lang="en">Common exception: Mail creation / distribution failed</p>
+      "! @parameter iv_commit_mode | <p class="shorttext synchronized" lang="en">Commit mode (use const. C_COMMIT_MODE_*)</p>
+      "! @raising   zcx_ca_mail    | <p class="shorttext synchronized" lang="en">CA-TBX exception: Mail creation / distribution failed</p>
       send
         IMPORTING
           iv_immediately TYPE abap_bool DEFAULT abap_false
@@ -159,7 +159,7 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
       "! @parameter it_mail_text_hex | <p class="shorttext synchronized" lang="en">Mail text in hex / binary</p>
       "! @parameter iv_priority      | <p class="shorttext synchronized" lang="en">Document priority -> 1 = high, 5 = medium, 9 = low</p>
       "! @parameter iv_doc_class     | <p class="shorttext synchronized" lang="en">Document class (use const. C_DOCCLASS_*)</p>
-      "! @raising   zcx_ca_mail      | <p class="shorttext synchronized" lang="en">Common exception: Mail creation / distribution failed</p>
+      "! @raising   zcx_ca_mail      | <p class="shorttext synchronized" lang="en">CA-TBX exception: Mail creation / distribution failed</p>
       set_text
         IMPORTING
           iv_subject       TYPE string
@@ -183,7 +183,7 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
 *     o b j e c t   r e f e r e n c e s
       "! <p class="shorttext synchronized" lang="en">Agent Send Request</p>
       mo_bcs_queue_agent TYPE REF TO ca_queue_entry_bcs,
-      "! <p class="shorttext synchronized" lang="en">Common object: Application log (BAL)</p>
+      "! <p class="shorttext synchronized" lang="en">CA-TBX: Application log (BAL)</p>
       mo_log             TYPE REF TO zcl_ca_log,
       "! <p class="shorttext synchronized" lang="en">Wrapper Class for Office Documents</p>
       mo_mail            TYPE REF TO cl_document_bcs,
