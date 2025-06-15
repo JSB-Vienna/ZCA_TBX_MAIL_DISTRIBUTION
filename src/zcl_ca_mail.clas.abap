@@ -4,18 +4,13 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
 
 * P U B L I C   S E C T I O N
   PUBLIC SECTION.
-*   i n t e r f a c e s
-    INTERFACES:
-      zif_ca_c_doc_class.
-
-*   a l i a s e s
-    ALIASES:
-*     Document classes, font, font types and sizes
-      c_docclass_htm          FOR  zif_ca_c_doc_class~c_docclass_htm,
-      c_docclass_raw          FOR  zif_ca_c_doc_class~c_docclass_raw.
-
 *   c o n s t a n t s
     CONSTANTS:
+      "! <p class="shorttext synchronized" lang="en">Document class for HTML</p>
+      c_docclass_htm TYPE so_obj_tp VALUE 'HTM' ##no_text,
+      "! <p class="shorttext synchronized" lang="en">Document class for RAW / plain text</p>
+      c_docclass_raw TYPE so_obj_tp VALUE 'RAW' ##no_text,
+
       "! <p class="shorttext synchronized" lang="en">Requested status: Never</p>
       c_reqstat_never   TYPE bcs_rqst          VALUE 'N'  ##no_text,
       "! <p class="shorttext synchronized" lang="en">Requested status: Only if errors occur</p>

@@ -69,6 +69,16 @@
      <DESCRIPT>Constructor</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
+     <CMPNAME>C_DOCCLASS_HTM</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Document class for HTML</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CMPNAME>C_DOCCLASS_RAW</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Document class for RAW / plain text</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
      <CMPNAME>C_REQSTAT_ALWAYS</CMPNAME>
      <LANGU>D</LANGU>
      <DESCRIPT>Requested status: Always</DESCRIPT>
