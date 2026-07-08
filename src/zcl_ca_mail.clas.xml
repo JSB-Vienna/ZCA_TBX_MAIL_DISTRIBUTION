@@ -219,16 +219,6 @@
      <DESCRIPT>Get send request</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
-     <CMPNAME>MO_BCS_QUEUE_AGENT</CMPNAME>
-     <LANGU>D</LANGU>
-     <DESCRIPT>Agent Send Request</DESCRIPT>
-    </SEOCOMPOTX>
-    <SEOCOMPOTX>
-     <CMPNAME>MO_BCS_QUEUE_AGENT</CMPNAME>
-     <LANGU>E</LANGU>
-     <DESCRIPT>Agent Send Request</DESCRIPT>
-    </SEOCOMPOTX>
-    <SEOCOMPOTX>
      <CMPNAME>MO_COMMIT_MODES</CMPNAME>
      <LANGU>D</LANGU>
      <DESCRIPT>Constants for commit mode</DESCRIPT>
@@ -287,16 +277,6 @@
      <CMPNAME>MV_MAIL_SIZE</CMPNAME>
      <LANGU>E</LANGU>
      <DESCRIPT>Mail size</DESCRIPT>
-    </SEOCOMPOTX>
-    <SEOCOMPOTX>
-     <CMPNAME>MV_SUBJECT_LONG</CMPNAME>
-     <LANGU>D</LANGU>
-     <DESCRIPT>Long subject (at the end limited to 255 digits)</DESCRIPT>
-    </SEOCOMPOTX>
-    <SEOCOMPOTX>
-     <CMPNAME>MV_SUBJECT_LONG</CMPNAME>
-     <LANGU>E</LANGU>
-     <DESCRIPT>Long subject (at the end limited to 255 digits)</DESCRIPT>
     </SEOCOMPOTX>
     <SEOCOMPOTX>
      <CMPNAME>SEND</CMPNAME>

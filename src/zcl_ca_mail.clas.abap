@@ -7,9 +7,9 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
 *   c o n s t a n t s
     CONSTANTS:
       "! <p class="shorttext synchronized" lang="en">Document class for HTML</p>
-      c_docclass_htm TYPE so_obj_tp VALUE 'HTM' ##no_text,
+      c_docclass_htm    TYPE so_obj_tp VALUE 'HTM' ##no_text,
       "! <p class="shorttext synchronized" lang="en">Document class for RAW / plain text</p>
-      c_docclass_raw TYPE so_obj_tp VALUE 'RAW' ##no_text,
+      c_docclass_raw    TYPE so_obj_tp VALUE 'RAW' ##no_text,
 
       "! <p class="shorttext synchronized" lang="en">Requested status: Never</p>
       c_reqstat_never   TYPE bcs_rqst          VALUE 'N'  ##no_text,
@@ -176,22 +176,18 @@ CLASS zcl_ca_mail DEFINITION PUBLIC
 *   i n s t a n c e   a t t r i b u t e s
     DATA:
 *     o b j e c t   r e f e r e n c e s
-      "! <p class="shorttext synchronized" lang="en">Agent Send Request</p>
-      mo_bcs_queue_agent TYPE REF TO ca_queue_entry_bcs,
       "! <p class="shorttext synchronized" lang="en">CA-TBX: Application log (BAL)</p>
-      mo_log             TYPE REF TO zcl_ca_log,
+      mo_log       TYPE REF TO zcl_ca_log,
       "! <p class="shorttext synchronized" lang="en">Wrapper Class for Office Documents</p>
-      mo_mail            TYPE REF TO cl_document_bcs,
+      mo_mail      TYPE REF TO cl_document_bcs,
       "! <p class="shorttext synchronized" lang="en">Business Communication Service</p>
-      mo_snd_req         TYPE REF TO cl_bcs,
+      mo_snd_req   TYPE REF TO cl_bcs,
 
 *     s i n g l e   v a l u e s
       "! <p class="shorttext synchronized" lang="en">Name of Character Set</p>
-      mv_charset         TYPE cpcsname,
+      mv_charset   TYPE cpcsname,
       "! <p class="shorttext synchronized" lang="en">Mail size</p>
-      mv_mail_size       TYPE i,
-      "! <p class="shorttext synchronized" lang="en">Long subject (at the end limited to 255 digits)</p>
-      mv_subject_long    TYPE string.
+      mv_mail_size TYPE i.
 
 *   i n s t a n c e   m e t h o d s
     METHODS:
@@ -224,7 +220,6 @@ ENDCLASS.
 
 
 CLASS zcl_ca_mail IMPLEMENTATION.
-
 
   METHOD add_recipient.
     "-----------------------------------------------------------------*
@@ -262,7 +257,7 @@ CLASS zcl_ca_mail IMPLEMENTATION.
     "   Assemble attachment name without extension (individualize
     "   by inheriting this class and redefine this method)
     "-----------------------------------------------------------------*
-    result = |{ io_doc->mbo_document-instid }_{ iv_doc_cnt }|.
+    result = |{ io_doc->get_document_name( ) }_{ iv_doc_cnt }|.
   ENDMETHOD.                    "assemble_attachm_name
 
 
@@ -303,7 +298,6 @@ CLASS zcl_ca_mail IMPLEMENTATION.
     "-----------------------------------------------------------------*
     "Local data definitions
     DATA:
-      lx_mail_err      TYPE REF TO zcx_ca_mail,
       lv_file_ext      TYPE saedoktyp,
       lv_doc_cnt       TYPE numc2,
       lv_max_mail_size TYPE p LENGTH 8 DECIMALS 3.
@@ -336,7 +330,7 @@ CLASS zcl_ca_mail IMPLEMENTATION.
           ENDIF.
 
           "Create file name, add file extension and shorten to 50 digits
-          ADD 1 TO lv_doc_cnt.
+          lv_doc_cnt = lv_doc_cnt + 1.
           DATA(lv_attachm_name) = finalize_attachm_name( iv_file_ext     = lv_file_ext
                                                          iv_attachm_name = assemble_attachm_name(
                                                                                        iv_doc_cnt = lv_doc_cnt
@@ -347,7 +341,7 @@ CLASS zcl_ca_mail IMPLEMENTATION.
           IF mv_mail_size GT iv_max_mail_size.
             CASE iv_raise_exc_mail_size.
               WHEN abap_false.
-                ADD 1 TO result.
+                result = result + 1.
 
               WHEN abap_true.
                 lv_max_mail_size = iv_max_mail_size / 1048576.  "Divide by 1 MB
@@ -374,11 +368,11 @@ CLASS zcl_ca_mail IMPLEMENTATION.
 
         CATCH zcx_ca_error INTO DATA(lx_error).
           mo_log->add_msg_exc( lx_error ).
-          ADD 1 TO result.
+          result = result + 1.
 
         CATCH cx_document_bcs INTO DATA(lx_bcs_error).
           mo_log->add_msg_exc( lx_bcs_error ).
-          ADD 1 TO result.
+          result = result + 1.
       ENDTRY.
     ENDLOOP.
 
@@ -532,15 +526,12 @@ CLASS zcl_ca_mail IMPLEMENTATION.
 
     TRY.
         "Return status after distribution? NO!!
-        mo_snd_req->set_status_attributes(
-                            i_requested_status = COND #(
-                                                   WHEN iv_req_status IS INITIAL
-                                                     THEN c_reqstat_never
-                                                     ELSE iv_req_status )
-                            i_status_mail      = COND #(
-                                                   WHEN iv_status_mail IS INITIAL
-                                                     THEN c_statmail_never
-                                                     ELSE iv_status_mail ) ) ##no_text.
+        mo_snd_req->set_status_attributes( i_requested_status = COND #( WHEN iv_req_status IS INITIAL
+                                                                          THEN c_reqstat_never
+                                                                          ELSE iv_req_status )
+                                           i_status_mail      = COND #( WHEN iv_status_mail IS INITIAL
+                                                                          THEN c_statmail_never
+                                                                          ELSE iv_status_mail ) ) ##no_text.
         "Distribute immediately?
         mo_snd_req->set_send_immediately( iv_immediately ).
 
@@ -553,8 +544,7 @@ CLASS zcl_ca_mail IMPLEMENTATION.
     ENDTRY.
 
     TRY.
-        "Send mail via SAP connect in any case. The send request is then
-        "visible in transaction SOST.
+        "Send mail via SAP connect in any case. The send request is then visible in transaction SOST.
         mo_snd_req->send( ).
 
         "Commit work to complete send request
@@ -595,12 +585,6 @@ CLASS zcl_ca_mail IMPLEMENTATION.
     "-----------------------------------------------------------------*
     "   Set subject and mail body
     "-----------------------------------------------------------------*
-    "Local data definitions
-    DATA:
-      lx_error    TYPE REF TO cx_root,
-      ls_doc_attr TYPE bcss_dbpa,
-      lv_subject  TYPE so_obj_des.
-
     "Check allowed document classes
     IF iv_doc_class NE c_docclass_raw AND
        iv_doc_class NE c_docclass_htm.
@@ -613,25 +597,24 @@ CLASS zcl_ca_mail IMPLEMENTATION.
     ENDIF.
 
     TRY.
-        "Create mail document
-        mv_subject_long = lv_subject = iv_subject.
-        "If no subject is passed here, the mail will have no subject, although the
-        "subject is passed here after as long subject.
-        mo_mail = cl_document_bcs=>create_document( i_subject    = lv_subject
+        "Create mail document WITHOUT subject first!! And just afterwards set the subject in the mail document
+        "to make it visible in TA SOST and additionally set the long subject in the send request to use it up to
+        "255 digits although it is a string.
+        mo_mail = cl_document_bcs=>create_document( i_subject    = space
                                                     i_text       = it_mail_text
                                                     i_hex        = it_mail_text_hex
                                                     i_importance = iv_priority
                                                     i_type       = iv_doc_class ).
-
-        "Set long subject, limited to 255 digits
-        mo_snd_req->set_message_subject( mv_subject_long ).
+        mo_mail->set_subject( CONV #( COND #( WHEN strlen( iv_subject ) LE 50
+                                                THEN iv_subject  ELSE iv_subject(47) && '...' ) ) ).
+        mo_snd_req->set_message_subject( iv_subject ).
 
         "Get attributes of mail body or attachment
-        ls_doc_attr = mo_mail->if_document_bcs~get_body_part_attributes( 1 ).
-        mv_mail_size = mv_mail_size + ls_doc_attr-docsize + strlen( mv_subject_long ).
+        DATA(ls_doc_attr) = mo_mail->if_document_bcs~get_body_part_attributes( 1 ).
+        mv_mail_size = mv_mail_size + ls_doc_attr-docsize + strlen( iv_subject ).
 
       CATCH cx_document_bcs
-            cx_send_req_bcs INTO lx_error.
+            cx_send_req_bcs INTO DATA(lx_error).
         "Creating mail document failed
         RAISE EXCEPTION TYPE zcx_ca_mail
           EXPORTING
